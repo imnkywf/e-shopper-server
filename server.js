@@ -48,68 +48,57 @@ app.get("/api/getproducts", function (req, res) {
   res.json({
     products: [
       {
-        login: "yyx990803",
-        html_url: "https://github.com/yyx990803",
-        avatar_url:
-          "https://avatars3.githubusercontent.com/u/499550?s=460&u=de41ec9325e8a92e281b96a1514a0fd1cd81ad4a&v=4",
-        id: 1,
-      },
-      {
-        login: "ruanyf",
-        html_url: "https://github.com/ruanyf",
-        avatar_url: "https://avatars2.githubusercontent.com/u/905434?s=460&v=4",
-        id: 2,
-      },
-      {
-        login: "yyx9908032",
-        html_url: "https://github.com/yyx990803",
-        avatar_url:
-          "https://avatars3.githubusercontent.com/u/499550?s=460&u=de41ec9325e8a92e281b96a1514a0fd1cd81ad4a&v=4",
-        id: 3,
-      },
-      {
-        login: "ruanyf2",
-        html_url: "https://github.com/ruanyf",
-        avatar_url: "https://avatars2.githubusercontent.com/u/905434?s=460&v=4",
-        id: 4,
-      },
-      {
-        login: "yyx9908033",
-        html_url: "https://github.com/yyx990803",
-        avatar_url:
-          "https://avatars3.githubusercontent.com/u/499550?s=460&u=de41ec9325e8a92e281b96a1514a0fd1cd81ad4a&v=4",
+        name: "Dainsh Cup Cake",
+        description: 'Each cupcake is handcrafted with care and attention to detail, ensuring that every bite is as delicious as the last. Whether you enjoying it with your morning coffee, as an afternoon snack, or as a dessert after dinner, our Danish Cup Cake is the perfect indulgence.',
+        img_url: "https://patisserie-cle.com/wp-content/uploads/2023/05/Product-pic-300x300.jpg",
+        flag: 'Pastry',
+        price: 20,
         id: 5,
       },
       {
-        login: "ruanyf3",
-        html_url: "https://github.com/ruanyf",
-        avatar_url: "https://avatars2.githubusercontent.com/u/905434?s=460&v=4",
+        name: "PrimaHam",
+        description: 'PrimaHam is a premium ham product from Thailand, made from high-quality pork that is carefully selected and processed to create a delicious and flavorful ham. The ham is known for its tender texture, rich taste, and beautiful appearance.',
+        img_url: "https://www.primaham-thai.com/wp-content/uploads/2022/05/Boneless-Ham-Steak-300x300.png",
+        flag: 'Food',
+        price: 15,
         id: 6,
       },
       {
-        login: "yyx9908034",
-        html_url: "https://github.com/yyx990803",
-        avatar_url:
-          "https://avatars3.githubusercontent.com/u/499550?s=460&u=de41ec9325e8a92e281b96a1514a0fd1cd81ad4a&v=4",
+        name: "Cream of Wheat",
+        description: 'Cream of Wheat is a brand of hot cereal made from wheat semolina that has been ground into a fine granular consistency. The cereal is easy to prepare and can be cooked on the stove or in the microwave. It has a smooth and creamy texture and a mild, nutty flavor that can be enhanced with the addition of milk, sugar, honey, or fruit.',
+        img_url: "https://creamofwheat.com/wp-content/uploads/80106053-Front-300x300.png",
+        flag: 'Food',
+        price: 8,
         id: 7,
       },
       {
-        login: "ruanyf4",
-        html_url: "https://github.com/ruanyf",
-        avatar_url: "https://avatars2.githubusercontent.com/u/905434?s=460&v=4",
+        name: "Heavenduft",
+        description: "Coastal India is an all-season fragrance for all occasions.  It is distinctively designed for use in the scorching climate of India. The scent profile is very rich, elegant, and sophisticated.  It doesn’t have the typical strong attar fragrance, and one will find that it’s more towards the French style.",
+        img_url: "https://www.heavenduft.com/wp-content/uploads/2023/05/0F1A8867-scaled-300x300.jpg",
+        flag: 'Life',
+        price: 500,
         id: 8,
       },
       {
-        login: "yyx9908035",
-        html_url: "https://github.com/yyx990803",
-        avatar_url:
-          "https://avatars3.githubusercontent.com/u/499550?s=460&u=de41ec9325e8a92e281b96a1514a0fd1cd81ad4a&v=4",
+        name: "EVO Helemt",
+        description: "The EVO Helmet is a high-quality, full-face helmet designed for motorcycle riders who demand the best in safety, comfort, and style. This helmet is constructed using advanced materials and manufacturing techniques, making it both strong and lightweight.",
+        img_url: "https://evohelmet.com/wp-content/uploads/2023/04/RX05-BLACK4-1-300x300.jpg",
+        flag: 'Sport',
+        price: 200,
         id: 9,
       },
+      {
+        name: "Balance Bike",
+        description: "Introducing our Balance Bike - the perfect way for your child to learn the fundamentals of biking! This lightweight and durable bike is designed with young children in mind, featuring a sturdy aluminum frame and adjustable handlebars and seat to accommodate growth spurts.",
+        img_url: "https://cdn.shopify.com/s/files/1/0371/2945/products/PRODUCTTEMPLATE_300x.png?v=1619828642",
+        flag: 'Sport',
+        price: 380,
+        id: 10,
+      },
+
     ],
   })
 })
-
 
 app.listen(5000, "localhost", (err) => {
   if (!err) {
