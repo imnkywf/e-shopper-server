@@ -1,6 +1,9 @@
 const express = require("express")
-const axios = require("axios")
 const app = express()
+const axios = require("axios")
+const jwt = require('jsonwebtoken');
+const secretKey = 'qwertyuiopeshooper';
+
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
@@ -8,6 +11,33 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
   next()
 })
+
+const users = [
+  {
+    user_id: 1,
+    username: "qwer444",
+    password: "1234",
+    cart: []
+  },
+  {
+    user_id: 2,
+    username: "cxvxvx222",
+    password: "1234",
+    cart: []
+  },
+  {
+    user_id: 3,
+    username: "crt001122",
+    password: "1234",
+    cart: []
+  },
+  {
+    user_id: 4,
+    username: "nf140901",
+    password: "1234",
+    cart: []
+  }
+]
 
 app.get("/api/getnewgoods", function (req, res) {
   res.json({
@@ -100,11 +130,50 @@ app.get("/api/getproducts", function (req, res) {
   })
 })
 
+app.get("/api/getusers", function (req, res) {
+  const username = req.query.username
+  const password = req.query.password
+  const foundUser = users.find(e => e.username === username && e.password === password)
+
+  if (foundUser) {
+    const token = jwt.sign({ user_id: foundUser.user_id }, secretKey, { expiresIn: '1h' })
+    res.json({
+      token,
+      foundUser
+    })
+  }
+  else {
+    res.status(404).json({
+      error: "User not found"
+    })
+  }
+})
+
+app.get("/api/getuserscart", function (req, res) {
+  const username = req.query.username
+  const password = req.query.password
+  const foundUser = users.find(e => e.username === username && e.password === password)
+
+  if (foundUser) {
+    const token = jwt.sign({ user_id: foundUser.user_id }, secretKey, { expiresIn: '1h' })
+    res.json({
+      token,
+      foundUser
+    })
+  }
+  else {
+    res.status(404).json({
+      error: "User not found"
+    })
+  }
+})
+
 app.listen(5000, "localhost", (err) => {
   if (!err) {
     console.log("server is runnning......")
     console.log("New goods: http://localhost:5000/api/getnewgoods")
     console.log("All products: http://localhost:5000/api/getproducts")
+    console.log("Users: http://localhost:5000/api/getusers")
   }
   else console.log(err);
 })
