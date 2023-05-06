@@ -1,6 +1,5 @@
 const express = require("express")
 const app = express()
-const axios = require("axios")
 const jwt = require('jsonwebtoken');
 const secretKey = 'qwertyuiopeshooper';
 
@@ -37,6 +36,19 @@ const users = [
     password: "1234",
     cart: []
   }
+]
+
+const imgUrls = [
+  { id: 1, img_url: "https://www.capitalcuisine.co.uk/shop/wp-content/uploads/2021/04/ApricotGingerChutney_Jar_LR-306x306.jpg" },
+  { id: 2, img_url: "https://ekofood.com.tr/wp-content/uploads/2020/04/6798-1-306x306.jpg" },
+  { id: 3, img_url: "https://img0.baidu.com/it/u=113188305,3423571500&fm=253&fmt=auto&app=138&f=JPEG?w=306&h=306" },
+  { id: 4, img_url: "https://img0.baidu.com/it/u=1256750200,1060162502&fm=253&fmt=auto&app=138&f=JPEG?w=306&h=306" },
+  { id: 5, img_url: "https://patisserie-cle.com/wp-content/uploads/2023/05/Product-pic-300x300.jpg" },
+  { id: 6, img_url: "https://www.primaham-thai.com/wp-content/uploads/2022/05/Boneless-Ham-Steak-300x300.png" },
+  { id: 7, img_url: "https://creamofwheat.com/wp-content/uploads/80106053-Front-300x300.png" },
+  { id: 8, img_url: "https://www.heavenduft.com/wp-content/uploads/2023/05/0F1A8867-scaled-300x300.jpg" },
+  { id: 9, img_url: "https://evohelmet.com/wp-content/uploads/2023/04/RX05-BLACK4-1-300x300.jpg" },
+  { id: 10, img_url: "https://cdn.shopify.com/s/files/1/0371/2945/products/PRODUCTTEMPLATE_300x.png?v=1619828642" }
 ]
 
 app.get("/api/getnewgoods", function (req, res) {
@@ -151,14 +163,32 @@ app.get("/api/getusers", function (req, res) {
 
 app.get("/api/getuserscart", function (req, res) {
   const username = req.query.username
-  const password = req.query.password
-  const foundUser = users.find(e => e.username === username && e.password === password)
+  const foundUser = users.find(e => e.username === username)
 
   if (foundUser) {
-    const token = jwt.sign({ user_id: foundUser.user_id }, secretKey, { expiresIn: '1h' })
     res.json({
-      token,
-      foundUser
+      cart: foundUser.cart
+    })
+  }
+  else {
+    res.status(404).json({
+      error: "User not found"
+    })
+  }
+})
+
+app.post("/api/addtoCart", function (req, res) {
+  const { username, id, good_name, quantity, price, img_url } = req.query
+  const { img_url: fullUrl } = imgUrls.find(e => e.id === +id)
+  const newGood = { id, good_name, quantity, price, fullUrl }
+  console.log(fullUrl);
+
+  const foundUser = users.find(e => e.username === username)
+  if (foundUser) {
+    foundUser.cart.push(newGood)
+    console.log(foundUser.cart);
+    res.json({
+      responseText: 'good has been added successfully'
     })
   }
   else {
@@ -174,6 +204,8 @@ app.listen(5000, "localhost", (err) => {
     console.log("New goods: http://localhost:5000/api/getnewgoods")
     console.log("All products: http://localhost:5000/api/getproducts")
     console.log("Users: http://localhost:5000/api/getusers")
+    console.log("Cart: http://localhost:5000/api/getuserscart")
+    console.log("AddCart: http://localhost:5000/api/addtoCart")
   }
   else console.log(err);
 })
